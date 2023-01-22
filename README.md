@@ -16,6 +16,8 @@ This package includes two client variants:
 import (
 	"context"
 	"fmt"
+	"log"
+	"net/http"
 
 	radiogarden "github.com/jonasrmichel/radio-garden-go"
 )
@@ -30,10 +32,13 @@ func main() {
 	// get a radio station's details
 	res, err := client.GetAraContentChannelChannelIdWithResponse(
 		context.Background(),
-		"9bd5454",
+		"6Wd9zj6i",
 	)
 	if err != nil {
 		panic(err)
+	}
+	if res.StatusCode() != http.StatusOK {
+		log.Fatalf("API Error: %s", string(res.Body))
 	}
 
 	// print the station's details
